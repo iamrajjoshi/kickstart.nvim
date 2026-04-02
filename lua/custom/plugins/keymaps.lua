@@ -30,6 +30,18 @@ return {
       vim.notify('Copied GitHub permalink', vim.log.levels.INFO)
     end, { desc = '[G]itHub [L]ink' })
 
+    -- Alt+Up/Down → move lines (works in normal, insert, and visual mode)
+    vim.keymap.set('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move line down' })
+    vim.keymap.set('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move line up' })
+    vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move line down' })
+    vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move line up' })
+    vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move selection down' })
+    vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move selection up' })
+
+    -- Cmd+Z → undo, Cmd+Shift+Z → redo
+    vim.keymap.set({ 'n', 'i', 'v' }, '<C-z>', '<cmd>undo<cr>', { desc = 'Undo (Cmd+Z)' })
+    vim.keymap.set({ 'n', 'i', 'v' }, '<C-S-z>', '<cmd>redo<cr>', { desc = 'Redo (Cmd+Shift+Z)' })
+
     -- Cmd+/ → Ctrl+/ → toggle comment
     vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Toggle comment (Cmd+/)' })
     vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Toggle comment (Cmd+/)' })
